@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Scripts>
+	<ReadAll> 
+		select * from image
+	</ReadAll>
+	<Update>
+		update image set name = '{0}', description = '{1}' where id = {2}
+	</Update>
+	<Create>
+		insert into image(id, name, description)
+		values ( {0}, '{1}', '{2}')
+	</Create>
+	<Delete>
+		delete from image where id = {0}
+	</Delete>
+	<GetMaxID>
+		select coalesce(max(id), 0)  from image
+
+	</GetMaxID>
+</Scripts>

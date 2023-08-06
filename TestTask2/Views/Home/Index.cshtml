@@ -31,14 +31,30 @@
                 </div>
 
             <div class="butn">
-                <button>
-                    Загрузить изображение
-                </button>
+                <input id="load" type="file" value="Загрузить изображение" placeholder="Загрузить файл">
             </div>
+
+            <div class="titleDecript">
+                Название
+            </div>
+
+            <input id="name" class="input_wrap" type="text" maxlength="50" size="10" placeholder="введите новое название " />
 
             <div class="titleDecript">
                 Описание
             </div>
+            <textarea id="descript" class="input_wrap" name="Text1" rows="5" placeholder="Введите изменения"></textarea>
+
+            <div class="ButnContainer">
+                <button id="save">
+                    Сохранить изменения
+                </button>
+
+                <button id="del">
+                    Удалить
+                </button>
+            </div>
+
 
         </div>
 

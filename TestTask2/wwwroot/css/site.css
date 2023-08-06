@@ -65,3 +65,18 @@ button {
 #Template{
     display: none;
 }
+
+textarea {
+    width: 100%;
+    height: 140px;
+    resize: none;
+    background-color: rgb(120, 120, 120);
+}
+.ButnContainer{
+    height: 10vh;
+    text-align: center;
+}
+input {
+    background-color: rgb(120, 120, 120);
+    width: 100%;
+}
