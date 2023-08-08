@@ -1,4 +1,5 @@
-﻿using TestTask2.Interfaces;
+﻿using TestTask2.Configuration;
+using TestTask2.Interfaces;
 
 namespace TestTask2.Repositories.FileServices
 {
@@ -6,13 +7,23 @@ namespace TestTask2.Repositories.FileServices
     {
         public byte[] GetImage(long id)
         {
-            return File.ReadAllBytes($"{id}.dat");
+            var pat = ConfigHelper.Configuration.ImagePath;
+            var path = Path.Combine(pat, $"{id}.dat");
+            return File.ReadAllBytes(path);
         }
 
         public void SaveImage(long id, byte[] bytes)
         {
-            File.WriteAllBytes($"{id}.dat", bytes);
-            
+            var pat = ConfigHelper.Configuration.ImagePath;
+            var path = Path.Combine(pat,$"{id}.dat");
+            File.WriteAllBytes(path, bytes);
+        }
+
+        public void DeleteImage(long id)
+        {
+            var pat = ConfigHelper.Configuration.ImagePath;
+            var path = Path.Combine(pat, $"{id}.dat");
+            File.Delete(path);
         }
     }
 }

@@ -30,7 +30,7 @@ namespace TestTask2.Repositories.DB
             }
             return result.ToArray();
         }
-        private long GetMaxID()
+        public long GetMaxID()
         {
             var id = ExecuteScript(ScriptsProvider.ScriptsProvider.Scripts.GetMaxID);
             return (long)id.First().First();
@@ -41,6 +41,7 @@ namespace TestTask2.Repositories.DB
             var str = string.Format(ScriptsProvider.ScriptsProvider.Scripts.Create, id, info.Name, info.Description);
             ExecuteScript(str);
         }
+
         public IEnumerable<MetaInfo> ReadAll()
         {
             var res = new List<MetaInfo>();
