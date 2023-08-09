@@ -26,16 +26,16 @@ namespace TestTask2.Controllers
         [HttpGet]
         public IActionResult GetFiles()
         {
-            var res = new ImageMetaRepository();
-            var a = res.ReadAll().Select(x => APIFileInfo.FromMeta(x)).ToArray();
+            var repositiry = new ImageMetaRepository();
+            var a = repositiry.ReadAll().Select(x => APIFileInfo.FromMeta(x)).ToArray();
             return Ok(JsonConvert.SerializeObject(a));
         }
         [Route("delete")]
         [HttpGet]
         public IActionResult DeleteImage([FromQuery] long id)
         {
-            var res = new ImageMetaRepository();
-            res.Delete(id);
+            var repositiry = new ImageMetaRepository();
+            repositiry.Delete(id);
             var image = new ImageRepository();
             image.DeleteImage(id);
             return Ok();
@@ -44,10 +44,10 @@ namespace TestTask2.Controllers
         [HttpPost]
         public IActionResult LoadImage()
         {
-            var res = new ImageMetaRepository();
+            var repositiry = new ImageMetaRepository();
             var rawRequestBody = new StreamReader(Request.Body).ReadToEndAsync().GetAwaiter().GetResult();
 
-            res.Create(JsonConvert.DeserializeObject<MetaInfo>(rawRequestBody));
+            repositiry.Create(JsonConvert.DeserializeObject<MetaInfo>(rawRequestBody));
             return Ok();
         }
         public IActionResult DeleteImage()
@@ -59,16 +59,16 @@ namespace TestTask2.Controllers
         [HttpPost]
         public IActionResult SaveImage()
         {
-            var res = new ImageRepository();
-            var q = new ImageMetaRepository();
+            var repositiry = new ImageRepository();
+            var imageRepositiry = new ImageMetaRepository();
             var rawRequestBody = new StreamReader(Request.Body).ReadToEndAsync().GetAwaiter().GetResult();
             var bytes = Convert.FromBase64String(rawRequestBody.Split(',').Last());
-            var i = q.GetMaxID();
-            if(i==0)
+            var maxID = imageRepositiry.GetMaxID();
+            if(maxID == 0)
             {
-                i++;
+                maxID++;
             }
-            res.SaveImage(i, bytes);
+            repositiry.SaveImage(maxID, bytes);
             return Ok();
         }
 
@@ -76,21 +76,21 @@ namespace TestTask2.Controllers
         [HttpGet]
         public IActionResult GetImage([FromQuery] long id)
         {
-            var res = new ImageRepository();
+            var repositiry = new ImageRepository();
             Console.WriteLine(id);
-            var pat = res.GetImage(id);
-            var q = Convert.ToBase64String(pat);
-            return Ok(q);
+            var pat = repositiry.GetImage(id);
+            var byteStr = Convert.ToBase64String(pat);
+            return Ok(byteStr);
         }
 
         [Route("update")]
         [HttpPost]
         public IActionResult UpdateImage()
         {
-            var res = new ImageMetaRepository();
+            var repositiry = new ImageMetaRepository();
             var rawRequestBody = new StreamReader(Request.Body).ReadToEndAsync().GetAwaiter().GetResult();
 
-            res.Update(JsonConvert.DeserializeObject<MetaInfo>(rawRequestBody));
+            repositiry.Update(JsonConvert.DeserializeObject<MetaInfo>(rawRequestBody));
             return Ok();
         }
     }

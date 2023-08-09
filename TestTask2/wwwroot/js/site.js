@@ -1,5 +1,5 @@
 ﻿window.onload = function () {
-    ListInit();
+    listInit();
     initEvent()
 
 }
@@ -34,7 +34,7 @@ function delImage() {
     xmlhttp.onreadystatechange = function ()
     {
         if (this.readyState == 4 && this.status == 200) {
-            ListInit()
+            listInit()
         }
     }
     xmlhttp.open("GET", url, true);
@@ -97,7 +97,7 @@ function saveImage() {
 
     xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            ListInit()
+            listInit()
         }
     }
 
@@ -151,7 +151,7 @@ function updateList() {
 
 var files = []
 
-function ListInit()
+function listInit()
 {
     files.length = 0
     var xmlhttp = new XMLHttpRequest();
